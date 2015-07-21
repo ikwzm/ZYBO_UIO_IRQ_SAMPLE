@@ -85,7 +85,7 @@ void main()
 
         error_count = 0;
         for(i = 0; i < check_size ; i++) {
-            if (((unsigned char*)(outlet_buf.buf))[i] != (i & 0xFF))
+            if (((unsigned char*)(outlet_buf.buf))[i] != ((unsigned char*)(intake_buf.buf))[i])
                 error_count++;
         }
         if (error_count > 0) {
