@@ -1,0 +1,6 @@
+[submodule "ZYBO_PUMP"]
+	path = ZYBO_PUMP
+	url = git://github.com/ikwzm/ZYBO_PUMP.git
+[submodule "udmabuf"]
+	path = udmabuf
+	url = git://github.com/ikwzm/udmabuf.git
