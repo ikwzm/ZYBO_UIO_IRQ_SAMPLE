@@ -26,9 +26,11 @@ FPGAのPL(Programmable Logic)部には簡単なDMAコントローラをプログ
 また、ユーザー空間からDMAバッファをアクセスするために、udmabufを使っています。
 
 
-![図1 構成](./readme.img/akgeo1.jpg)
+![図1 構成](./readme.img/akgeo1.jpg "図1 構成")
 
-<div style="text-align: center;">図1 構成</div>
+図1 構成
+
+<br />
 
 
 
@@ -165,22 +167,25 @@ UIOの割り込みのロジックは、一度割り込みを受け付けると�
 ZYNQの場合、UIOが制御する割り込みコントローラーはPS(Processing System)部の汎用割り込みコントローラ(GIC)までです。PL(Programmable Logic)部の割り込み制御までは関知しません。
 
 
-![図2 単純な割り込み制御の例](./readme.img/akgeo2.jpg)
+![図2 単純な割り込み制御の例](./readme.img/akgeo2.jpg "図2 単純な割り込み制御の例")
 
-<div style="text-align: center;">図2 単純な割り込み制御の例</div>
+図2 単純な割り込み制御の例
 
-
-
-![図3 PL部で複数の割り込み要求信号を論理和している例](./readme.img/akgeo3.jpg)
-
-<div style="text-align: center;">図3 PL部で複数の割り込み要求信号を論理和している例</div>
+<br />
 
 
+![図3 PL部で複数の割り込み要求信号を論理和している例](./readme.img/akgeo3.jpg "図3 PL部で複数の割り込み要求信号を論理和している例")
 
-![図4 PL部で割り込みを制御している例](./readme.img/akgeo4.jpg)
+図3 PL部で複数の割り込み要求信号を論理和している例
 
-<div style="text-align: center;">図4 PL部で割り込みを制御している例</div>
+<br />
 
+
+![図4 PL部で割り込みを制御している例](./readme.img/akgeo4.jpg "図4 PL部で割り込みを制御している例")
+
+図4 PL部で割り込みを制御している例
+
+<br />
 
 
 
