@@ -26,7 +26,7 @@ int uio_poll_irq(int uio_fd)
     timeout.tv_sec  = 100;
     timeout.tv_nsec = 0;
     poll_result = ppoll(fds, 1, &timeout, &sigmask);
-    if (poll_result > 0) {
+    if ((poll_result > 0) && (fds[0].revents & POLLIN)) {
         read(uio_fd, &irq_count,  sizeof(irq_count));
     }
     return poll_result;
