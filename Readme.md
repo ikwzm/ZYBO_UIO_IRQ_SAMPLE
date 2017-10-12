@@ -234,19 +234,22 @@ Submodule 'udmabuf' (git://github.com/ikwzm/udmabuf.git) registered for path 'ud
 ```Shell
 zynq$ git submodule update
 Cloning into 'ZYBO_PUMP'...
-remote: Counting objects: 146, done.        
+remote: Counting objects: 191, done.        
 remote: Compressing objects: 100% (3/3), done.        
-remote: Total 146 (delta 5), reused 4 (delta 4), pack-reused 139        
-Receiving objects: 100% (146/146), 1.34 MiB | 683 KiB/s, done.
-Resolving deltas: 100% (71/71), done.
-Submodule path 'ZYBO_PUMP': checked out '48e53f5383348d8783714d8d1a5b0365d5838412'
+remote: Total 191 (delta 5), reused 4 (delta 4), pack-reused 184        
+Receiving objects: 100% (191/191), 1.94 MiB | 443.00 KiB/s, done.
+Resolving deltas: 100% (96/96), done.
+Checking connectivity... done.
+Submodule path 'ZYBO_PUMP': checked out '7bf3ed940a190b981cb83114293831ad7bd8bd89'
 Cloning into 'udmabuf'...
-remote: Counting objects: 35, done.        
-remote: Compressing objects: 100% (3/3), done.        
-remote: Total 35 (delta 0), reused 0 (delta 0), pack-reused 32        
-Receiving objects: 100% (35/35), 63.72 KiB, done.
-Resolving deltas: 100% (13/13), done.
-Submodule path 'udmabuf': checked out 'f2c61bc60484382d16fdd5f0beb9d15a1fa896c3'
+remote: Counting objects: 162, done.        
+remote: Compressing objects: 100% (4/4), done.        
+remote: Total 162 (delta 2), reused 6 (delta 2), pack-reused 156        
+Receiving objects: 100% (162/162), 132.27 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (87/87), done.
+Checking connectivity... done.
+Submodule path 'udmabuf': checked out 'c82c5f56cd88be5e7c35ba212e1c48d1bbf0f372'
+
 ```
 
 
