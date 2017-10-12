@@ -1,10 +1,13 @@
-# UIO(User space IO)の割り込みの使い方の例#
+
+# UIO(User space IO)の割り込みの使い方の例
 
 
-## はじめに##
+
+## はじめに
 
 
-### UIOとは###
+
+### UIOとは
 
 
 UIOはユーザー空間でデバイスドライバを作成する仕組みです。
@@ -16,7 +19,7 @@ UIOはユーザー空間でデバイスドライバを作成する仕組みで�
 
 
 
-### プロジェクトの構成###
+### プロジェクトの構成
 
 
 このプロジェクトではCPUとしてXilinx社のZYNQを使用します。ZYNQはCPUにARM社のCortex-A9を搭載したFPGAです。
@@ -55,23 +58,21 @@ https://github.com/ikwzm/udmabuf
 
 
 
-### 対応プラットフォーム###
+### 対応プラットフォーム
 
 
 * OS : Linux Kernel Version 3.6 - 3.8 (私が動作を確認したのは 3.8です).
-
 * CPU: ARM Cortex-A9 (ZYNQ)
-
 * ボード: ZYBO
 
 
 
 
+## UIOの割り込みの仕組み
 
-## UIOの割り込みの仕組み##
 
 
-### 割り込みの許可/禁止の設定###
+### 割り込みの許可/禁止の設定
 
 
 UIOでは割り込みの許可or禁止の設定は デバイスファイル(/dev/uio0)にwriteすることで設定します。書き込むデータは32bitのinteger でなければなりません。1をwriteすることで割り込みを許可します。0をwriteすることで割り込みを禁止します。
@@ -95,7 +96,7 @@ int uio_irq_off(int uio_fd)
 
 
 
-### read()による割り込み待ち###
+### read()による割り込み待ち
 
 
 UIOでは read() を使って、割り込みが発生するまで読み出しプロセスをブロックできます。読み出すデータの型は32bitのintegerでなければなりません。
@@ -118,7 +119,7 @@ read()で割り込みを待つ場合、割り込みが発生するまで読み�
 
 
 
-### poll()による割り込み待ち###
+### poll()による割り込み待ち
 
 
 ppoll()を使って割り込み待ちをする例を示します。
@@ -151,7 +152,7 @@ poll()の戻り値が正の場合、割り込みが入っていることを示�
 
 
 
-### 連続して割り込みを受け付けたい場合###
+### 連続して割り込みを受け付けたい場合
 
 
 UIOの割り込みのロジックは、一度割り込みを受け付けると自動的に割り込みを禁止するようになっています。したがって、再度割り込み待ち状態に入る前に、デバイスファイル(/dev/uio0)に1をwrite()して割り込みを許可しなければなりません。
@@ -161,7 +162,7 @@ UIOの割り込みのロジックは、一度割り込みを受け付けると�
 
 
 
-### UIOが管理する割り込みコントローラー###
+### UIOが管理する割り込みコントローラー
 
 
 ZYNQの場合、UIOが制御する割り込みコントローラーはPS(Processing System)部の汎用割り込みコントローラ(GIC)までです。PL(Programmable Logic)部の割り込み制御までは関知しません。
@@ -194,11 +195,11 @@ PL部で複数の割り込み信号を論理和していたり、PL部に独自�
 
 
 
+## プロジェクトの準備と実行
 
-## プロジェクトの準備と実行##
 
 
-### プロジェクトのダウンロード###
+### プロジェクトのダウンロード
 
 
 http://github.com/ikwzm/ZYBO_UIO_IRQ_SAMPLE.git からリポジトリをダウンロードします。
@@ -206,7 +207,7 @@ http://github.com/ikwzm/ZYBO_UIO_IRQ_SAMPLE.git からリポジトリをダウ�
 
 ```Shell
 zynq$ git clone git://github.com/ikwzm/ZYBO_UIO_IRQ_SAMPLE.git
-Cloning into \'ZYBO_UIO_IRQ_SAMPLE\'...
+Cloning into 'ZYBO_UIO_IRQ_SAMPLE'...
 remote: Counting objects: 10, done.        
 remote: Compressing objects: 100% (9/9), done.        
 remote: Total 10 (delta 1), reused 10 (delta 1), pack-reused 0        
@@ -225,32 +226,32 @@ zynq$ cd ZYBO_UIO_IRQ_SAMPLE
 
 ```Shell
 zynq$ git submodule init
-Submodule \'ZYBO_PUMP\' (git://github.com/ikwzm/ZYBO_PUMP.git) registered for path \'ZYBO_PUMP\'
-Submodule \'udmabuf\' (git://github.com/ikwzm/udmabuf.git) registered for path \'udmabuf\'
+Submodule 'ZYBO_PUMP' (git://github.com/ikwzm/ZYBO_PUMP.git) registered for path 'ZYBO_PUMP'
+Submodule 'udmabuf' (git://github.com/ikwzm/udmabuf.git) registered for path 'udmabuf'
 ```
 
 
 ```Shell
 zynq$ git submodule update
-Cloning into \'ZYBO_PUMP\'...
+Cloning into 'ZYBO_PUMP'...
 remote: Counting objects: 146, done.        
 remote: Compressing objects: 100% (3/3), done.        
 remote: Total 146 (delta 5), reused 4 (delta 4), pack-reused 139        
 Receiving objects: 100% (146/146), 1.34 MiB | 683 KiB/s, done.
 Resolving deltas: 100% (71/71), done.
-Submodule path \'ZYBO_PUMP\': checked out \'48e53f5383348d8783714d8d1a5b0365d5838412\'
-Cloning into \'udmabuf\'...
+Submodule path 'ZYBO_PUMP': checked out '48e53f5383348d8783714d8d1a5b0365d5838412'
+Cloning into 'udmabuf'...
 remote: Counting objects: 35, done.        
 remote: Compressing objects: 100% (3/3), done.        
 remote: Total 35 (delta 0), reused 0 (delta 0), pack-reused 32        
 Receiving objects: 100% (35/35), 63.72 KiB, done.
 Resolving deltas: 100% (13/13), done.
-Submodule path \'udmabuf\': checked out \'f2c61bc60484382d16fdd5f0beb9d15a1fa896c3\'
+Submodule path 'udmabuf': checked out 'f2c61bc60484382d16fdd5f0beb9d15a1fa896c3'
 ```
 
 
 
-### udmabufのビルド###
+### udmabufのビルド
 
 
 udmabufは次のようにビルドします。詳細はudmabuf/Readme.md を参照してください。
@@ -264,21 +265,21 @@ zynq# cd udmabuf
 ```Shell
 zynq# make
 make -C /usr/src/kernel M=/home/ichiro/udmabuf modules
-make[1]: Entering directory \'/usr/src/kernel\'
+make[1]: Entering directory '/usr/src/kernel'
   Building modules, stage 2.
   MODPOST 1 modules
 WARNING: modpost: Found 1 section mismatch(es).
 To see full details build your kernel with:
-\'make CONFIG_DEBUG_SECTION_MISMATCH=y\'
+'make CONFIG_DEBUG_SECTION_MISMATCH=y'
   LD [M]  /home/ichiro/udmabuf/udmabuf.ko
-make[1]: Leaving directory \'/usr/src/kernel\'
+make[1]: Leaving directory '/usr/src/kernel'
 ```
 
 
 
 
 
-### ZYBO_PUMPのビルド###
+### ZYBO_PUMPのビルド
 
 
 ZYBO_PUMPはZYNQのPL部のDMAコントローラとして使います。詳細はZYBO_PUMP/Readme.md を参照してください。ただ、最初からFPGAの論理合成、配置配線、ビットストリームファイルの生成、ブートローダーの生成をするのは、慣れていない人は手間取るかもしれません。
@@ -295,7 +296,7 @@ zynq$ cd ZYBO_PUMP
 zynq$ git checkout -b 1.1-build-project origin/1.1-build-project
 Previous HEAD position was 48e53f5... PUMP_AXI4 を ikwzm_pipework_pump_axi3_to_axi3_1.0 を使用するように変更.
 Branch 1.1-build-project set up to track remote branch 1.1-build-project from origin.
-Switched to a new branch \'1.1-build-project\'
+Switched to a new branch '1.1-build-project'
 ```
 
 
@@ -305,7 +306,7 @@ zynq$ ls -la boot/BOOT.bin
 
 
 
-### デバイスツリーファイルの準備###
+### デバイスツリーファイルの準備
 
 
 このプロジェクトではDMAコントローラーのレジスタアクセスと割り込みをUIOで行い、またDMAバッファをudmabufで確保します。そのためにはLinuxが起動するときのデバイスツリーに以下の内容を追加しておく必要があります。
@@ -338,11 +339,11 @@ UIOのデバイスドライバのエントリーはpump-uio@43c10000です。こ
 
 このプロジェクトではDMAコントローラーのレジスタは0x43C1000に割り当てています。
 
-interrupts=<0x0 0x1d 0x4> の２番目のパラメータの0x1d(十進数で29)がこの割り込み番号を指定しています。DMAコントローラーの割り込みはPS部のIRQ_F2P[0]に接続しています。ZYNQのテクニカルリファレンスマニュアルによれば、IRQ_F2P[0]は汎用割り込みコントローラー(GIC)内の共有ペリフェラル割り込み(SPI)の61番を通じて割り込みがかかります。61から32引いた値を設定するようです。
+interrupts=\<0x0 0x1d 0x4\> の２番目のパラメータの0x1d(十進数で29)がこの割り込み番号を指定しています。DMAコントローラーの割り込みはPS部のIRQ_F2P[0]に接続しています。ZYNQのテクニカルリファレンスマニュアルによれば、IRQ_F2P[0]は汎用割り込みコントローラー(GIC)内の共有ペリフェラル割り込み(SPI)の61番を通じて割り込みがかかります。61から32引いた値を設定するようです。
 
-interrupts=<0x0 0x1d 0x4>の１番目のパラメータはGIC内部の割り込みの種類を指定します。GIC内部には共有ペリフェラル割り込み(SPI)の他にCPUプライベートペリフェラル割り込み(PPI)とソフトウェア生成割り込み(SGI)があります。共有ペリフェラル割り込み(SPI)を使う場合は0を指定します。
+interrupts=\<0x0 0x1d 0x4\>の１番目のパラメータはGIC内部の割り込みの種類を指定します。GIC内部には共有ペリフェラル割り込み(SPI)の他にCPUプライベートペリフェラル割り込み(PPI)とソフトウェア生成割り込み(SGI)があります。共有ペリフェラル割り込み(SPI)を使う場合は0を指定します。
 
-interrupts=<0x0 0x1d 0x4>の３番目のパラメータは割り込み信号がエッジトリガーかレベルトリガーかを指定します。1を指定するとエッジトリガー、4を指定するとレベルトリガーになります。
+interrupts=\<0x0 0x1d 0x4\>の３番目のパラメータは割り込み信号がエッジトリガーかレベルトリガーかを指定します。1を指定するとエッジトリガー、4を指定するとレベルトリガーになります。
 
 udmabufはリード用とライト用の二つ用意しています。マイナー番号はそれぞれ4番と５番を割り当てています。バッファのサイズは0x400000(4MByte)です。
 
@@ -362,7 +363,7 @@ zynq$ dtc -I dts -O dtb -o devicetree.dtb devicetree.dts
 
 
 
-### Linuxのブート###
+### Linuxのブート
 
 
 このプロジェクトで用意したBOOT.bin と devicetree.dtb、さらにLinuxのカーネルイメージ(uImage)とルートファイルシステムをSDカードに書き込んでブートします。ここらへんの詳細は省略します。
@@ -370,7 +371,7 @@ zynq$ dtc -I dts -O dtb -o devicetree.dtb devicetree.dts
 
 
 
-### udmabufのロード###
+### udmabufのロード
 
 
 Linuxが起動したらudmabufをロードします。
@@ -400,7 +401,7 @@ udmabuf pump-udmabuf5.2: driver installed.
 
 
 
-### サンプルコードのビルドと実行###
+### サンプルコードのビルドと実行
 
 
 
@@ -447,6 +448,3 @@ time = 0.023045 sec
 time = 0.023064 sec
 time = 0.022894 sec
 ```
-
-
-
