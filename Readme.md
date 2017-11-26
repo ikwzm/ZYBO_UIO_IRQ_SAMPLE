@@ -61,7 +61,7 @@ https://github.com/ikwzm/udmabuf
 ### 対応プラットフォーム
 
 
-* OS : Linux Kernel Version 3.6 - 3.8 (私が動作を確認したのは 3.8です).
+* OS : Linux Kernel Version 3.6 - 3.8 , 4.12.
 * CPU: ARM Cortex-A9 (ZYNQ)
 * ボード: ZYBO
 
@@ -409,6 +409,11 @@ udmabuf pump-udmabuf5.2: driver installed.
 
 
 ```Shell
+zynq# cd c-sample
+```
+
+
+```Shell
 zynq# gcc sample1.c -o sample1
 ```
 
@@ -431,6 +436,9 @@ time = 0.023121 sec
 
 
 
+```Shell
+zynq# cd c-sample
+```
 
 
 ```Shell
@@ -450,4 +458,29 @@ time = 0.022912 sec
 time = 0.023045 sec
 time = 0.023064 sec
 time = 0.022894 sec
+```
+
+
+
+
+
+```Shell
+zynq# cd python-sample
+```
+
+
+```Shell
+zynq# python3 sample.py
+elapsed_time:87.862[msec]
+elapsed_time:87.648[msec]
+elapsed_time:87.638[msec]
+elapsed_time:87.634[msec]
+elapsed_time:87.658[msec]
+elapsed_time:87.73[msec]
+elapsed_time:87.752[msec]
+elapsed_time:87.626[msec]
+elapsed_time:87.688[msec]
+average_time:87.693[msec]
+thougput    :191.318[MByte/sec]
+udmabuf4 == udmabuf5 : OK
 ```
